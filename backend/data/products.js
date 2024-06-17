@@ -65,7 +65,7 @@ const products = [
         numReviews: 8,
     },
     {
-        _id: '6',
+        _id: '5',
         name:'ps5',
         image:'/images/playstation.jpg',
         description:
