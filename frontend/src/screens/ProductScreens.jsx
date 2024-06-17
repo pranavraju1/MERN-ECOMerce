@@ -1,13 +1,29 @@
-import { useParams } from "react-router-dom" //this is used to get the id
-import products from "../products"
-import { Link } from "react-router-dom"
-import { Button, Card, Col, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap"
-import Ratings from "../components/Ratings"
+import { useParams } from "react-router-dom"; //this is used to get the id
+import { Link } from "react-router-dom";
+import { Button, Card, Col, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import Ratings from "../components/Ratings";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 
 const ProductScreens = () => {
+
+  const [product,setProduct] = useState({});
+
+
+
   const {id:productId} = useParams()
-  const product = products.find((p)=>p._id === productId);
+ // const product = products.find((p)=>p._id === productId);
+ 
+ //we want this to run if the product ID changes
+ useEffect(()=>{
+  const fetchProduct = async ()=>{
+    const {data} = await axios.get(`/api/products/${productId}`);
+    setProduct(data);
+  }
+  fetchProduct();
+
+ },[productId])
 
   return (
     <>
